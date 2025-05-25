@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Object Painter</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" href="/assets/logo.png" type="image/png" />
+</head>
+
+<body>
+  <main>
+    <div style="display: flex; gap: 2rem;">
+      <!-- Tombol panah vertikal di kiri canvas -->
+      <div id="translateArrowButtons" style="display: none; margin-top: 150px;">
+        <!-- tombol arah -->
+      </div>
+
+      <!-- Pembungkus untuk tombol geser & canvas -->
+      <div id="canvas-switcher">
+        <button id="slideLeft" class="slide-button">&#60;</button>
+
+        <!-- Canvas 2D View -->
+        <section id="canvas2D-view" class="canvas-view active">
+          <img id="rotateIcon" src="/assets/rotate-icon.png"
+            style="display: none; position: absolute; width: 50px; height: 50px; cursor: grab;" />
+          <h3>Object 2D</h3>
+          <div id="canvas2D-controls" class="top-controls">
+            <button id="drawYinYang"><img src="/assets/yin-yang.png" alt=""></button>
+            <button id="drawMoonStar"><img src="/assets/moon.png" alt=""></button>
+            <button id="drawCross"><img src="/assets/cross.png" alt=""></button>
+          </div>
+          <canvas id="canvas2D" width="800" height="500"></canvas>
+        </section>
+
+        <!-- Canvas 3D View -->
+        <section id="canvas3D-view" class="canvas-view">
+          <img id="rotate3DIcon" src="/assets/rotate-icon-3D.png"
+            style="display: none; position: absolute; width: 50px; height: 50px; cursor: grab;" />
+          <h3>Object 3D</h3>
+          <div id="canvas3D-controls" class="top-controls">
+            <button id="drawPear"><img src="/assets/pear.png" alt=""></button>
+            <button id="drawMosqueDome"><img src="/assets/mosque-dome.png" alt=""></button>
+            <button id="drawCapsule"><img src="/assets/capsule.png" alt=""></button>
+          </div>
+          <div id="canvas3D" style="width: 800px; height: 500px;"></div>
+
+          <div id="resizeOverlay3D"
+            style="display: none; position: absolute; border: 2px dashed black; pointer-events: none; box-sizing: border-box;">
+            <!-- Handle resize -->
+            <div class="resize-handle" data-dir="nw"></div>
+            <div class="resize-handle" data-dir="n"></div>
+            <div class="resize-handle" data-dir="ne"></div>
+            <div class="resize-handle" data-dir="e"></div>
+            <div class="resize-handle" data-dir="se"></div>
+            <div class="resize-handle" data-dir="s"></div>
+            <div class="resize-handle" data-dir="sw"></div>
+            <div class="resize-handle" data-dir="w"></div>
+          </div>
+
+        </section>
+
+        <button id="slideRight" class="slide-button">&#62;</button>
+      </div>
+
+      <!-- Kontrol transformasi -->
+      <section id="controls" style="margin-top: 5px;">
+        <div>
+          <button id="resetBtn">Reset</button>
+          <button id="scaleBtn">Scale</button>
+          <button id="translateBtn">Translate</button>
+          <div class="dropdown">
+            <button id="rotateBtn">Rotate 2D</button>
+            <div class="dropdown-content">
+              <button onclick="rotateObject('right')">Rotate Right 90°</button>
+              <button onclick="rotateObject('left')">Rotate Left 90°</button>
+              <button onclick="rotateObject('180')">Rotate 180°</button>
+              <button onclick="rotateObject('flipV')">Flip Vertical</button>
+              <button onclick="rotateObject('flipH')">Flip Horizontal</button>
+            </div>
+          </div>
+          <div class="dropdown">
+            <button id="rotate3DBtn">Rotate 3D</button>
+            <div class="dropdown-content">
+              <button onclick="rotate3D('x')">Rotate X</button>
+              <button onclick="rotate3D('y')">Rotate Y</button>
+              <button onclick="rotate3D('z')">Rotate Z</button>
+            </div>
+          </div>
+
+          <input type="color" id="colorPicker" value="#FF0000" />
+
+          <div id="scaleForm">
+            <!-- Untuk objek 2D -->
+            <div id="scale2DControls" class="scale-group">
+              <h4 style="color: darkblue;">Scale 2D</h4>
+              <div class="scale-row">
+                <label for="scaleX2D">X:</label>
+                <input type="number" id="scaleX2D" step="0.1" value="1" />
+              </div>
+              <div class="scale-row">
+                <label for="scaleY2D">Y:</label>
+                <input type="number" id="scaleY2D" step="0.1" value="1" />
+              </div>
+            </div>
+
+            <!-- Untuk objek 3D -->
+            <div id="scale3DControls" class="scale-group">
+              <h4 style="color: darkblue;">Scale 3D</h4>
+              <div class="scale-row">
+                <label for="scaleX">X:</label>
+                <input type="number" id="scaleX" step="0.1" value="1" />
+              </div>
+              <div class="scale-row">
+                <label for="scaleY">Y:</label>
+                <input type="number" id="scaleY" step="0.1" value="1" />
+              </div>
+              <div class="scale-row">
+                <label for="scaleZ">Z:</label>
+                <input type="number" id="scaleZ" step="0.1" value="1" />
+              </div>
+            </div>
+
+            <button id="applyScaleBtn">Apply Scale</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Three.js -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <!-- Script utama -->
+  <script src="/js/script.js"></script>
+</body>
+
+</html>

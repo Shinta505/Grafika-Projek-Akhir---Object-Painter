@@ -1,0 +1,313 @@
+/* Reset dasar */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font dan warna dasar */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #FFFFFF;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+header {
+  background: linear-gradient(135deg, #00b4db, #0083b0);
+  color: white;
+  padding: 1rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+}
+
+/* Main layout */
+main {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.canvas-view {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.canvas-view.active {
+  display: flex;
+}
+
+.slide-button {
+  height: 60px;
+  font-size: 24px;
+  padding: 0 16px;
+  background-color: white;
+  border: 2px solid #0083b0;
+  color: #0083b0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.slide-button:hover {
+  background-color: #0083b0;
+  color: white;
+}
+
+#canvas-switcher {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Controls section */
+#controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  /* Rata kiri di kolom kanan */
+}
+
+
+#controls>div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+#controls button,
+#controls input[type="color"] {
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  border: 2px solid #0083b0;
+  border-radius: 8px;
+  color: #0083b0;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#controls button:hover {
+  background-color: #0083b0;
+  color: white;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background-color: transparent;
+}
+
+.dropdown-content button {
+  display: block;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#controls input[type="color"] {
+  width: 50px;
+  height: 40px;
+  padding: 0;
+  border-radius: 8px;
+}
+
+/* Canvas container */
+#canvas-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* 2D Canvas style */
+#canvas2D {
+  border: 2px solid #ccc;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+
+/* 3D Canvas container */
+#canvas3D {
+  width: 800px;
+  height: 500px;
+  border-radius: 12px;
+  background-color: #e6eef2;
+  border: 2px dashed #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Responsif */
+@media (max-width: 1000px) {
+
+  #canvas2D,
+  #canvas3D {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  #canvas-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+#translateArrowButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#translateArrowButtons button,
+#translateArrowButtons .empty {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 10px;
+  background-color: #ffffff;
+  color: darkblue;
+}
+
+#translateArrowButtons button:hover,
+#translateArrowButtons .empty:hover {
+  background-color: #0083b0;
+  color: white;
+}
+
+/* Tombol horizontal di atas canvas */
+.top-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.top-controls button {
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  border: 2px solid #555;
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.top-controls button:hover {
+  background-color: #555;
+  color: white;
+}
+
+#scaleForm {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 20px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+#scaleForm label {
+  font-weight: 600;
+  color: #333;
+}
+
+#scaleForm input[type="number"] {
+  width: 80px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  font-size: 14px;
+}
+
+#scaleForm button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#scaleForm button:hover {
+  background-color: #0056b3;
+}
+
+.scale-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.scale-group h4 {
+  margin-bottom: 10px;
+}
+
+.scale-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.scale-row label {
+  flex: 1;
+  font-weight: 500;
+}
+
+.scale-row input {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+}
+
+.resize-handle {
+  width: 10px;
+  height: 10px;
+  background: white;
+  border: 1px solid black;
+  position: absolute;
+  pointer-events: all;
+}
