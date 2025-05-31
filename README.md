@@ -1,6 +1,6 @@
 # 🎨 Grafika Komputer - Object Painter 🖌️
 
-Selamat datang di **Editor Grafika Kreatif - Object Painter**! Aplikasi web interaktif yang memungkinkan Anda untuk menuangkan kreativitas dengan menggambar dan memanipulasi objek 2D dan 3D. Proyek ini merupakan implementasi konsep-konsep grafika komputer dasar dalam antarmuka yang ramah pengguna.
+Selamat datang di **Object Painter**! Aplikasi web interaktif yang memungkinkan Anda untuk menuangkan kreativitas dengan menggambar dan memanipulasi objek 2D dan 3D. Proyek ini merupakan implementasi konsep-konsep grafika komputer dasar dalam antarmuka yang ramah pengguna.
 
 ![image](https://github.com/user-attachments/assets/0091308c-c567-4f4c-b1fa-a1b554c96de0)
 
