@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2D - Object Painter</title>
+    <link rel="stylesheet" href="2d.css">
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+</head>
+
+<body>
+    <div id="messageBox"></div>
+    <div class="container">
+        <div class="toolbar">
+            <div class="tool-section">
+                <h3>Bentuk Kustom</h3>
+                <button id="drawCross">Cross</button>
+                <button id="drawStarCrescent">Bulan Bintang</button>
+                <button id="drawYinYang">Yin Yang</button>
+            </div>
+
+            <div class="tool-section">
+                <h3>Opsi</h3>
+                <label for="fillColorCheck">
+                    <input type="checkbox" id="fillColorCheck"> Fill Color
+                </label>
+                <input type="color" id="fillColor" value="#000000" title="Warna Isi">
+                <label for="strokeColorCheck">
+                    <input type="checkbox" id="strokeColorCheck" checked> Garis Tepi
+                </label>
+                <input type="color" id="strokeColor" value="#000000" title="Warna Garis Tepi">
+                <label for="strokeWidth">Lebar Garis:</label>
+                <input type="range" id="strokeWidth" min="1" max="20" value="2">
+            </div>
+
+            <div class="tool-section">
+                <h3>Alat</h3>
+                <button id="selectToolBtn">Select</button>
+                <button id="brushTool">Brush</button>
+                <button id="eraserTool">Eraser</button>
+                <label for="brushSize">Ukuran Brush/Eraser:</label>
+                <input type="range" id="brushSize" min="1" max="50" value="5">
+            </div>
+
+            <div class="tool-section">
+                <h3>Warna (Brush/Garis jika tidak di-override)</h3>
+                <input type="color" id="colorPicker" value="#000000">
+            </div>
+
+            <div class="tool-section">
+                <h3>Transformasi (Objek Terpilih)</h3>
+                <p>Metode Input:
+                    <button id="transformMouse">Mouse</button>
+                    <button id="transformKeyboard">Keyboard</button>
+                    <button id="transformForm">Form</button>
+                </p>
+
+                <div id="transformFormInputs" style="display:none;">
+                    <h4>Translate</h4>
+                    <label for="translateX">X:</label> <input type="number" id="translateX" value="0">
+                    <label for="translateY">Y:</label> <input type="number" id="translateY" value="0">
+                    <button id="applyTranslate">Apply Translate</button>
+
+                    <h4>Scale (Kelipatan)</h4>
+                    <label for="scaleX">X:</label> <input type="number" id="scaleX" value="1" step="0.1">
+                    <label for="scaleY">Y:</label> <input type="number" id="scaleY" value="1" step="0.1">
+                    <button id="applyScale">Apply Scale</button>
+
+                    <h4>Rotate (Derajat)</h4>
+                    <label for="rotation">Angle:</label> <input type="number" id="rotation" value="0">
+                    <button id="applyRotate">Apply Rotate</button>
+                </div>
+            </div>
+
+            <button id="clearCanvas">Clear Canvas</button>
+            <button id="saveAsImage">Save As Image</button>
+            <a href="../index.html" style="text-decoration: none;"><button id="backToHome">Back to Home</button></a>
+        </div>
+        <canvas id="drawingCanvas"></canvas>
+    </div>
+
+    <script src="2d.js"></script>
+</body>
+
+</html>

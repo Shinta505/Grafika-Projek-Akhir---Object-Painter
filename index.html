@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Object Painter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+</head>
+<body class="animated-gradient text-white min-h-screen flex flex-col justify-center items-center p-6 relative">
+    <div id="particle-container" class="absolute inset-0 overflow-hidden z-0"></div>
+
+    <div class="text-center z-10 relative">
+        <h1 class="text-5xl md:text-6xl font-bold mb-6 title-animation">
+            Grafika Komputer - Object Painter
+        </h1>
+        <p class="text-xl md:text-2xl mb-12 max-w-2xl mx-auto title-animation" style="animation-delay: 0.2s;">
+            Wujudkan imajinasi Anda dalam 2D atau jelajahi kedalaman ruang 3D. Pilih mode editor Anda:
+        </p>
+
+        <div class="space-y-6 md:space-y-0 md:space-x-8 flex flex-col md:flex-row justify-center items-center">
+            <a href="2D/2d.html" class="bg-sky-500 hover:bg-sky-600 text-white font-bold py-4 px-10 rounded-lg text-xl md:text-2xl shadow-lg btn-hover-effect button-animation-2d inline-block w-full md:w-auto">
+                🎨 Editor 2D
+            </a>
+            <a href="3D/3d.html" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded-lg text-xl md:text-2xl shadow-lg btn-hover-effect button-animation-3d inline-block w-full md:w-auto">
+                🧊 Editor 3D
+            </a>
+        </div>
+    </div>
+
+    <footer class="absolute bottom-6 text-center w-full text-sm text-gray-200 z-10">
+        Hak Cipta &copy; <span id="currentYear"></span> Shinta, Veyza, Dhea.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

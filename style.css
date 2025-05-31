@@ -1,0 +1,113 @@
+body {
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    /* Mencegah scrollbar dari animasi */
+}
+
+/* Animasi untuk latar belakang gradien */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.animated-gradient {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+}
+
+/* Animasi untuk tombol */
+.btn-hover-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-hover-effect:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Animasi untuk teks judul */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title-animation {
+    animation: fadeInDown 1s ease-out;
+}
+
+/* Animasi untuk tombol muncul */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.button-animation-2d {
+    animation: fadeInUp 1s ease-out 0.5s backwards;
+    /* Muncul setelah judul */
+}
+
+.button-animation-3d {
+    animation: fadeInUp 1s ease-out 0.8s backwards;
+    /* Muncul setelah tombol 2D */
+}
+
+/* Efek partikel sederhana */
+.particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    pointer-events: none;
+    /* Partikel tidak bisa diklik */
+    animation: float 20s infinite linear;
+    opacity: 0;
+    /* Mulai transparan */
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px) translateX(0px) rotate(0deg);
+        opacity: 0.7;
+    }
+
+    25% {
+        transform: translateY(-150px) translateX(50px) rotate(90deg);
+    }
+
+    50% {
+        transform: translateY(-300px) translateX(0px) rotate(180deg);
+        opacity: 0.3;
+    }
+
+    75% {
+        transform: translateY(-150px) translateX(-50px) rotate(270deg);
+    }
+
+    100% {
+        transform: translateY(0px) translateX(0px) rotate(360deg);
+        opacity: 0.7;
+    }
+}

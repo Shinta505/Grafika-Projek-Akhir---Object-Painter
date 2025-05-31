@@ -1,0 +1,208 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 0;
+    padding: 20px;
+    background-color: #2c3e50;
+    /* Warna background lebih gelap untuk kontras */
+    min-height: 100vh;
+    box-sizing: border-box;
+    color: #ecf0f1;
+}
+
+.container {
+    display: flex;
+    background-color: #34495e;
+    /* Warna container lebih gelap */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 1400px;
+    /* Lebar maksimal lebih besar */
+    min-height: calc(100vh - 40px);
+}
+
+.toolbar {
+    width: 320px;
+    /* Lebar toolbar sedikit lebih besar */
+    padding: 15px;
+    background-color: #4a6fa5;
+    /* Warna toolbar yang berbeda */
+    border-right: 1px solid #2c3e50;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    overflow-y: auto;
+    max-height: calc(100vh - 40px);
+    flex-shrink: 0;
+}
+
+.tool-section {
+    margin-bottom: 15px;
+    border: 1px solid #5d8aa8;
+    /* Border lebih soft */
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #3b5998;
+    /* Background section */
+}
+
+.tool-section h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1em;
+    color: #ecf0f1;
+    border-bottom: 1px solid #5d8aa8;
+    padding-bottom: 5px;
+}
+
+.toolbar button,
+.toolbar input[type="color"],
+.toolbar input[type="range"],
+.toolbar input[type="number"],
+.toolbar label {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 8px 5px;
+    border-radius: 4px;
+    border: 1px solid #5d8aa8;
+    box-sizing: border-box;
+    background-color: #ecf0f1;
+    /* Background input/button */
+    color: #2c3e50;
+    /* Text color input/button */
+}
+
+.toolbar input[type="number"] {
+    padding: 8px 10px;
+    /* Penyesuaian padding untuk number input */
+}
+
+
+.toolbar input[type="color"] {
+    height: 35px;
+    padding: 2px;
+}
+
+.toolbar button {
+    background-color: #769fcd;
+    /* Warna tombol */
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.toolbar button:hover {
+    background-color: #5272a3;
+    /* Warna hover tombol */
+}
+
+.toolbar button.active {
+    background-color: #3b5998;
+    /* Warna aktif tombol */
+    font-weight: bold;
+    border: 2px solid #ecf0f1;
+}
+
+.toolbar input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.toolbar label {
+    border: none;
+    padding: 0;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    /* Label transparan */
+    color: #ecf0f1;
+    /* Warna teks label */
+}
+
+#drawingCanvas {
+    border: 1px solid #000;
+    cursor: grab;
+    /* Default cursor untuk orbit controls */
+    background-color: #1e272e;
+    /* Warna canvas lebih gelap */
+    display: block;
+    flex-grow: 1;
+    flex-basis: 0;
+    min-width: 50px;
+    min-height: 50px;
+    height: calc(100vh - 40px);
+    /* Canvas mengisi tinggi */
+}
+
+#transformFormInputs {
+    padding: 10px;
+    border: 1px dashed #5d8aa8;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+#transformFormInputs h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: #ecf0f1;
+}
+
+#transformFormInputs label,
+#transformFormInputs input[type="number"] {
+    margin-bottom: 8px;
+    width: 100%;
+    display: block;
+}
+
+#transformFormInputs h4 {
+    margin-top: 15px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #ecf0f1;
+    padding-bottom: 4px;
+}
+
+#transformFormInputs .coord-label {
+    /* Class baru untuk label koordinat */
+    width: auto;
+    margin-right: 5px;
+    background-color: transparent;
+    color: #ecf0f1;
+}
+
+
+#transformFormInputs button {
+    width: 100%;
+    margin-top: 10px;
+    /* Margin atas untuk tombol apply */
+}
+
+#messageBox {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#backToHome {
+    background-color: #e74c3c;
+    color: white;
+    font-weight: bold;
+}
+
+#backToHome:hover {
+    background-color: #c0392b;
+}

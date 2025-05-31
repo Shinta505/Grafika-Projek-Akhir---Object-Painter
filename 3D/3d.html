@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D - Object Painter</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/TransformControls.js"></script>
+    <link rel="stylesheet" href="3d.css">
+    <link rel="icon" href="/assets/logo.png" type="image/png" />
+</head>
+
+<body>
+    <div id="messageBox"></div>
+    <div class="container">
+        <div class="toolbar">
+            <div class="tool-section">
+                <h3>Bentuk 3D</h3>
+                <button id="createVase">Buat Vas</button>
+                <button id="createCapsule">Buat Kapsul</button>
+                <button id="createMosqueDome">Buat Kubah Masjid</button>
+            </div>
+
+            <div class="tool-section">
+                <h3>Opsi Material (Objek Terpilih)</h3>
+                <label for="fillColorCheck">
+                    <input type="checkbox" id="fillColorCheck" checked> Warna Isi
+                </label>
+                <input type="color" id="fillColor" value="#ff8c00" title="Warna Isi">
+
+                <label for="strokeColorCheck">
+                    <input type="checkbox" id="strokeColorCheck" checked> Garis Tepi
+                </label>
+                <input type="color" id="strokeColor" value="#ffffff" title="Warna Garis Tepi">
+                <label for="strokeWidth">Lebar Garis:</label>
+                <input type="range" id="strokeWidth" min="1" max="10" value="2" step="0.1">
+            </div>
+
+            <div class="tool-section">
+                <h3>Alat</h3>
+                <button id="selectToolBtn">Select / Transform</button>
+            </div>
+
+            <div class="tool-section">
+                <h3>Transformasi (Objek Terpilih)</h3>
+                <p>Metode Input:
+                    <button id="transformMouse">Mouse (Gizmo)</button>
+                    <button id="transformKeyboard">Keyboard</button>
+                    <button id="transformForm">Form</button>
+                </p>
+
+                <div id="transformFormInputs" style="display:none;">
+                    <h4>Translate</h4>
+                    <label for="translateX" class="coord-label">X:</label> <input type="number" id="translateX"
+                        value="0" step="0.1">
+                    <label for="translateY" class="coord-label">Y:</label> <input type="number" id="translateY"
+                        value="0" step="0.1">
+                    <label for="translateZ" class="coord-label">Z:</label> <input type="number" id="translateZ"
+                        value="0" step="0.1">
+                    <button id="applyTranslate">Apply Translate</button>
+
+                    <h4>Scale (Kelipatan)</h4>
+                    <label for="scaleX" class="coord-label">X:</label> <input type="number" id="scaleX" value="1"
+                        step="0.1">
+                    <label for="scaleY" class="coord-label">Y:</label> <input type="number" id="scaleY" value="1"
+                        step="0.1">
+                    <label for="scaleZ" class="coord-label">Z:</label> <input type="number" id="scaleZ" value="1"
+                        step="0.1">
+                    <button id="applyScale">Apply Scale</button>
+
+                    <h4>Rotate (Derajat)</h4>
+                    <label for="rotateX" class="coord-label">X:</label> <input type="number" id="rotateX" value="0"
+                        step="1">
+                    <label for="rotateY" class="coord-label">Y:</label> <input type="number" id="rotateY" value="0"
+                        step="1">
+                    <label for="rotateZ" class="coord-label">Z:</label> <input type="number" id="rotateZ" value="0"
+                        step="1">
+                    <button id="applyRotate">Apply Rotate</button>
+                </div>
+            </div>
+
+            <button id="clearCanvas">Clear Canvas</button>
+            <button id="saveAsImage">Save As Image</button>
+            <button id="showHelp">Petunjuk Penggunaan</button>
+            <a href="../index.html" style="text-decoration: none;"><button id="backToHome">Back to Home</button></a>
+
+            <div id="helpOverlay"
+                style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); color:white; z-index:2000; padding:40px; overflow:auto;">
+                <h2>Petunjuk Penggunaan Keyboard</h2>
+                <ul>
+                    <li><b>Arrow Keys</b>: Gerak objek (X/Y)</li>
+                    <li><b>PageUp / PageDown</b>: Gerak objek (Z)</li>
+                    <li><b>S</b>: Scale up</li>
+                    <li><b>Ctrl + S</b>: Scale down</li>
+                    <li><b>R / F</b>: Rotasi Y</li>
+                    <li><b>T / G</b>: Rotasi X</li>
+                    <li><b>Y / H</b>: Rotasi Z</li>
+                    <li><b>Delete / Backspace</b>: Hapus objek</li>
+                    <li><b>Shift</b>: Gunakan untuk transformasi lebih halus</li>
+                </ul>
+                <button onclick="document.getElementById('helpOverlay').style.display='none'"
+                    style="margin-top:20px; padding:10px 20px;">Tutup</button>
+            </div>
+        </div>
+        <canvas id="drawingCanvas"></canvas>
+    </div>
+
+    <script src="3d.js"></script>
+</body>
+
+</html>
