@@ -256,9 +256,16 @@ function onKeyDown(event) {
 // --- Object Creation ---
 function createVaseMesh() {
     const points = [];
+    const y_min = (0 - 5) * 0.4; // Ketinggian terendah vas
+
+    // Tambahkan titik di pusat dasar untuk menutup bagian bawah
+    points.push(new THREE.Vector2(0, y_min)); // Titik ini menutup lubang di dasar
+
     for (let i = 0; i < 10; i++) {
+        // Titik-titik asli profil vas Anda
         points.push(new THREE.Vector2(Math.sin(i * 0.2) * 0.8 + 0.5, (i - 5) * 0.4));
     }
+
     const geometry = new THREE.LatheGeometry(points, 32);
     const material = new THREE.MeshStandardMaterial({
         color: parseInt(selectors.inputs.fillColor.value.replace("#", "0x"), 16),
@@ -278,10 +285,12 @@ function createCapsuleMesh() {
     const sphereSegments = 32;
     const cylinderSegments = 32;
 
+    // CylinderGeometry secara default sudah tertutup (openEnded: false)
     const cylinderGeom = new THREE.CylinderGeometry(radius, radius, height, cylinderSegments);
+    // SphereGeometry juga solid
     const sphereGeom = new THREE.SphereGeometry(radius, sphereSegments, sphereSegments, 0, Math.PI * 2, 0, Math.PI / 2);
 
-    const material = new THREE.MeshStandardMaterial({ // Create one material
+    const material = new THREE.MeshStandardMaterial({
         color: parseInt(selectors.inputs.fillColor.value.replace("#", "0x"), 16),
         roughness: 0.4,
         metalness: 0.1,
@@ -347,7 +356,11 @@ function createMosqueDomeMesh() {
     const pillarShaftPortion = 0.7;
 
     const points = [];
-    points.push(new THREE.Vector2(DOME_BASE_RADIUS, 0));
+    // Tambahkan titik di pusat dasar kubah untuk menutup bagian bawah
+    points.push(new THREE.Vector2(0, 0)); // Titik ini menutup lubang di dasar kubah
+
+    // Titik-titik profil asli kubah Anda
+    points.push(new THREE.Vector2(DOME_BASE_RADIUS, 0)); // Titik ini sekarang menjadi tepi luar dari dasar yang solid
     points.push(new THREE.Vector2(DOME_BASE_RADIUS * 0.97, DOME_CURVE_HEIGHT * 0.25));
     points.push(new THREE.Vector2(DOME_BASE_RADIUS * 0.85, DOME_CURVE_HEIGHT * 0.55));
     points.push(new THREE.Vector2(DOME_BASE_RADIUS * 0.60, DOME_CURVE_HEIGHT * 0.80));
@@ -357,13 +370,11 @@ function createMosqueDomeMesh() {
 
     const domeGeom = new THREE.LatheGeometry(points, radialSegments);
 
-    // Modifikasi material kubah agar tidak terlalu mengkilap
     const material = new THREE.MeshStandardMaterial({
         color: parseInt(selectors.inputs.fillColor.value.replace("#", "0x"), 16),
-        roughness: 0.8, // Dinaikkan agar lebih matte/doff
-        metalness: 0.5, // Bisa disesuaikan. Jika ingin tetap metalik tapi matte, bisa 0.5 - 0.7.
-        // Jika ingin non-metalik sama sekali, set ke 0.0 - 0.2.
-        side: THREE.DoubleSide,
+        roughness: 0.8,
+        metalness: 0.5,
+        side: THREE.DoubleSide, // Atau THREE.FrontSide
         visible: selectors.inputs.fillColorCheck.checked
     });
 
@@ -371,11 +382,11 @@ function createMosqueDomeMesh() {
     domeMesh.position.y = 0;
     domeMesh.userData.type = 'MosqueDome';
 
+    // Bulan sabit (tidak berubah)
     const moonBaseRadius = DOME_BASE_RADIUS * 0.12;
     const moonThickness = moonBaseRadius * 0.2;
-    const moonColor = 0xffd700; // Warna emas untuk bulan sabit
-    const moonMesh = createCrescentMoonMesh(moonBaseRadius, moonThickness, moonColor);
-
+    const moonColor = 0xffd700;
+    const moonMesh = createCrescentMoonMesh(moonBaseRadius, moonThickness, moonColor); // Pastikan fungsi ini ada
     const moonPositionY = DOME_CURVE_HEIGHT + actualPillarTotalHeight + moonBaseRadius * 0.5;
     moonMesh.position.set(0, moonPositionY, 0);
     domeMesh.add(moonMesh);
