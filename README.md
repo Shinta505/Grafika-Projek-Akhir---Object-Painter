@@ -14,7 +14,7 @@ Selamat datang di **Object Painter**! Aplikasi web interaktif yang memungkinkan 
 
 ### Editor 2D Komprehensif (`2D/2d.html`):
 * ✏️ **Menggambar Bentuk Kustom**:
-    * ✝️ Cross (Salib)
+    * ✝️ Cross
     * ☪️ Bulan Bintang
     * ☯️ Yin Yang
 * 🖌️ **Alat Menggambar & Edit**:
