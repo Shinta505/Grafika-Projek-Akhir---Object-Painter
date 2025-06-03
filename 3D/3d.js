@@ -65,7 +65,7 @@ const selectors = {
 function initThree() {
     // Scene
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x1e272e);
+    scene.background = new THREE.Color(0xf5f5f5); // Light gray background
 
     // Camera
     camera = new THREE.PerspectiveCamera(75, selectors.canvas.clientWidth / selectors.canvas.clientHeight, 0.1, 1000);
@@ -306,20 +306,80 @@ function createCapsuleMesh() {
     return group;
 }
 
+// Fungsi untuk membuat bulan
+function createCrescentMoonMesh(radius = 0.15, thickness = 0.05, color = 0xffd700) {
+    const shape = new THREE.Shape();
+    shape.absarc(0, 0, radius, 0, Math.PI * 2, false);
+    const hole = new THREE.Path();
+    hole.absarc(thickness * 0.2, 0, radius - thickness, 0, Math.PI * 2, true);
+    shape.holes.push(hole);
+
+    const extrudeSettings = {
+        depth: thickness,
+        bevelEnabled: false,
+        steps: 1
+    };
+
+    const geometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    // Modifikasi material bulan sabit agar tidak terlalu mengkilap
+    const material = new THREE.MeshStandardMaterial({
+        color: color,
+        roughness: 0.8, // Dinaikkan agar lebih matte
+        metalness: 0.6, // Sedikit dikurangi, atau bisa tetap tinggi jika ingin emas matte pekat
+        side: THREE.DoubleSide
+    });
+    const moonMesh = new THREE.Mesh(geometry, material);
+
+    moonMesh.rotation.y = Math.PI / 2;
+    return moonMesh;
+}
+
+// Fungsi utama untuk membuat kubah masjid beserta detailnya
 function createMosqueDomeMesh() {
-    const radius = 1.5;
-    const segments = 32;
-    const domeGeom = new THREE.SphereGeometry(radius, segments, segments, 0, Math.PI * 2, 0, Math.PI / 2);
+    const domeScale = 1.5;
+    const radialSegments = 32;
+
+    const DOME_BASE_RADIUS = domeScale;
+    const DOME_CURVE_HEIGHT = domeScale * 0.85;
+
+    const pillarRadius = DOME_BASE_RADIUS * 0.05;
+    const actualPillarTotalHeight = DOME_CURVE_HEIGHT * 0.25;
+    const pillarShaftPortion = 0.7;
+
+    const points = [];
+    points.push(new THREE.Vector2(DOME_BASE_RADIUS, 0));
+    points.push(new THREE.Vector2(DOME_BASE_RADIUS * 0.97, DOME_CURVE_HEIGHT * 0.25));
+    points.push(new THREE.Vector2(DOME_BASE_RADIUS * 0.85, DOME_CURVE_HEIGHT * 0.55));
+    points.push(new THREE.Vector2(DOME_BASE_RADIUS * 0.60, DOME_CURVE_HEIGHT * 0.80));
+    points.push(new THREE.Vector2(pillarRadius, DOME_CURVE_HEIGHT));
+    points.push(new THREE.Vector2(pillarRadius, DOME_CURVE_HEIGHT + actualPillarTotalHeight * pillarShaftPortion));
+    points.push(new THREE.Vector2(0, DOME_CURVE_HEIGHT + actualPillarTotalHeight));
+
+    const domeGeom = new THREE.LatheGeometry(points, radialSegments);
+
+    // Modifikasi material kubah agar tidak terlalu mengkilap
     const material = new THREE.MeshStandardMaterial({
         color: parseInt(selectors.inputs.fillColor.value.replace("#", "0x"), 16),
-        roughness: 0.6,
-        metalness: 0.3,
+        roughness: 0.8, // Dinaikkan agar lebih matte/doff
+        metalness: 0.5, // Bisa disesuaikan. Jika ingin tetap metalik tapi matte, bisa 0.5 - 0.7.
+        // Jika ingin non-metalik sama sekali, set ke 0.0 - 0.2.
         side: THREE.DoubleSide,
         visible: selectors.inputs.fillColorCheck.checked
     });
+
     const domeMesh = new THREE.Mesh(domeGeom, material);
     domeMesh.position.y = 0;
     domeMesh.userData.type = 'MosqueDome';
+
+    const moonBaseRadius = DOME_BASE_RADIUS * 0.12;
+    const moonThickness = moonBaseRadius * 0.2;
+    const moonColor = 0xffd700; // Warna emas untuk bulan sabit
+    const moonMesh = createCrescentMoonMesh(moonBaseRadius, moonThickness, moonColor);
+
+    const moonPositionY = DOME_CURVE_HEIGHT + actualPillarTotalHeight + moonBaseRadius * 0.5;
+    moonMesh.position.set(0, moonPositionY, 0);
+    domeMesh.add(moonMesh);
+
     return domeMesh;
 }
 
