@@ -228,11 +228,20 @@ function onCanvasClick(event) {
 }
 
 function onKeyDown(event) {
-    if (appState.transformMode !== 'keyboard' || !appState.selectedObject) return;
-
+    // Cek jika sedang mengetik di dalam input field, jangan lakukan apa-apa
     if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
         return;
     }
+
+    // Logika untuk menghapus objek (dibuat global)
+    if ((event.key.toLowerCase() === 'delete' || event.key.toLowerCase() === 'backspace') && appState.selectedObject) {
+        event.preventDefault(); // Mencegah browser kembali ke halaman sebelumnya saat menekan backspace
+        removeObject(appState.selectedObject);
+        return; // Keluar dari fungsi setelah menghapus
+    }
+
+    // Logika transformasi keyboard HANYA berjalan jika dalam mode 'keyboard'
+    if (appState.transformMode !== 'keyboard' || !appState.selectedObject) return;
 
     const step = { move: event.shiftKey ? 0.1 : 1, scale: event.shiftKey ? 0.01 : 0.1, rotate: event.shiftKey ? 1 : 5 };
     let changed = false;
@@ -264,17 +273,11 @@ function onKeyDown(event) {
         case 'g': obj.rotation.x -= THREE.MathUtils.degToRad(step.rotate); changed = true; break;
         case 'y': obj.rotation.z += THREE.MathUtils.degToRad(step.rotate); changed = true; break;
         case 'h': obj.rotation.z -= THREE.MathUtils.degToRad(step.rotate); changed = true; break;
-
-        case 'delete':
-        case 'backspace':
-            removeObject(appState.selectedObject);
-            changed = true;
-            break;
     }
 
     if (changed) {
         event.preventDefault();
-        if (appState.selectedObject) {
+        if (appState.selectedObject) { // Periksa apakah objek masih ada
             updateTransformFormInputs(appState.selectedObject);
             if (appState.selectedObject.edges) updateEdges(appState.selectedObject);
         }
